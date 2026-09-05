@@ -1,111 +1,90 @@
 <!doctype html>
 <html lang="vi">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>VideoTranslate AI Studio</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dịch Video → Tiếng Việt | AI Dubbing</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#080c18;color:#eef2ff;font:15px Inter,system-ui,Arial}
-header{height:64px;padding:0 28px;border-bottom:1px solid #202b45;display:flex;align-items:center;justify-content:space-between;background:#0d1324;position:sticky;top:0;z-index:5}
-.logo{font-size:21px;font-weight:800}.logo b{color:#7c5cff}.pill{padding:7px 11px;background:#17213a;border:1px solid #293655;border-radius:99px;color:#b8c4de}
-main{max-width:1250px;margin:auto;padding:25px 18px}.hero{text-align:center;margin:10px 0 24px}.hero h1{font-size:38px;margin:0 0 8px}.hero p{color:#93a2c1}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:#10172a;border:1px solid #25314d;border-radius:16px;padding:18px}.wide{grid-column:1/-1}
-.drop{border:2px dashed #3a4969;border-radius:14px;padding:30px;text-align:center;display:block;cursor:pointer}.drop:hover{border-color:#7c5cff}
-input,select,textarea{width:100%;margin-top:6px;background:#090f1e;color:#eef2ff;border:1px solid #293653;border-radius:9px;padding:10px}textarea{min-height:72px;resize:vertical}
-button{background:#7c5cff;color:white;border:0;border-radius:9px;padding:10px 14px;font-weight:700;cursor:pointer}button.secondary{background:#1a2640}button.green{background:#159b73}button.danger{background:#9c3152}
-.row{display:flex;gap:9px}.row>*{flex:1}.tabs{display:flex;gap:8px;margin-bottom:12px}.tabs button{background:#17213a}.tabs .active{background:#7c5cff}
-video{width:100%;max-height:390px;background:#000;border-radius:11px;margin-top:13px}.muted{color:#91a0bd}.status{margin-top:9px;color:#91a0bd}
-.toggle{display:flex;align-items:center;justify-content:space-between;background:#0b1222;border:1px solid #293653;border-radius:10px;padding:11px;margin-top:8px}.toggle input{width:auto;margin:0;transform:scale(1.3)}
-.segment{border:1px solid #293653;border-radius:12px;padding:12px;margin-top:10px;background:#0c1324}.segment-head{display:flex;justify-content:space-between;color:#91a0bd;font-size:13px}.time{display:flex;gap:7px}.time input{max-width:110px}
-.progress{height:9px;background:#1a2640;border-radius:99px;overflow:hidden;margin-top:12px}.bar{height:100%;width:0;background:#7c5cff;transition:.3s}
-.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}.chip{background:#192641;padding:7px 10px;border-radius:99px;cursor:pointer}.chip.on{background:#7c5cff}
-.note{font-size:13px;color:#8191b2;line-height:1.5}
-@media(max-width:800px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.hero h1{font-size:29px}}
-</style>
-</head>
+*{box-sizing:border-box}body{margin:0;background:#080c16;color:#f2f5ff;font:15px system-ui,Arial}
+header{padding:16px 28px;background:#0e1526;border-bottom:1px solid #25304a;display:flex;justify-content:space-between}
+.logo{font-size:21px;font-weight:800}.logo span{color:#7c5cff}
+main{max-width:1180px;margin:auto;padding:24px}.hero{text-align:center}.hero h1{font-size:36px;margin:8px}.muted{color:#92a0ba}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:#10182b;border:1px solid #27334e;border-radius:16px;padding:18px;margin-top:16px}.wide{grid-column:1/-1}
+.drop{display:block;text-align:center;padding:35px;border:2px dashed #3c4b6c;border-radius:14px;cursor:pointer}
+input,select,textarea{width:100%;background:#090f1d;color:#f2f5ff;border:1px solid #2a3855;border-radius:9px;padding:10px;margin-top:6px}textarea{min-height:75px}
+button{border:0;border-radius:9px;padding:10px 14px;background:#7657ff;color:white;font-weight:700;cursor:pointer}button.gray{background:#1b2842}button.green{background:#15976e}button.red{background:#a33a56}
+.row{display:flex;gap:9px}.row>*{flex:1}
+video{width:100%;max-height:390px;background:#000;border-radius:10px;margin-top:12px}
+.toggle{margin-top:9px;padding:12px;background:#0a1120;border:1px solid #2a3855;border-radius:10px;display:flex;justify-content:space-between}.toggle input{width:auto;margin:0}
+.progress{height:9px;background:#1a2640;border-radius:20px;overflow:hidden;margin-top:12px}.bar{height:100%;width:0;background:#7657ff}
+.seg{margin-top:10px;border:1px solid #2a3855;border-radius:12px;padding:12px;background:#0b1221}.seghead{display:flex;justify-content:space-between;color:#93a0ba}.time{display:flex;gap:8px}.time input{max-width:110px}
+.note{font-size:13px;color:#8190ad;line-height:1.5}
+@media(max-width:800px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.hero h1{font-size:28px}}
+</style></head>
 <body>
-<header><div class="logo">VideoTranslate <b>AI Studio</b></div><div class="pill">🎙️ Dịch • TTS • Phụ đề • Render</div></header>
+<header><div class="logo">VideoTranslate <span>VIET AI</span></div><div class="muted">English → Tiếng Việt</div></header>
 <main>
-<section class="hero"><h1>Dịch và lồng tiếng toàn bộ video</h1><p>Tải video hoặc dán URL → nhận diện lời thoại → dịch → chỉnh sửa → chọn giọng → xuất phụ đề/video.</p></section>
+<div class="hero"><h1>Dịch & lồng tiếng toàn bộ video sang Tiếng Việt</h1><p class="muted">Chỉ một ngôn ngữ đích: 🇻🇳 Tiếng Việt. Không còn phụ đề demo tiếng Anh.</p></div>
 
 <div class="grid">
 <section class="card">
-<h2>① Video nguồn</h2>
-<div class="tabs"><button class="active" onclick="tab('file',this)">Tải file</button><button onclick="tab('url',this)">Dán link</button></div>
-<div id="file"><label class="drop" for="upload">📁 <b>Chọn video</b><br><span class="muted">MP4 / MOV / WEBM</span></label><input id="upload" type="file" accept="video/*" hidden onchange="loadVideo(event)"></div>
-<div id="url" style="display:none"><input id="urlInput" placeholder="Dán link TikTok / Douyin / video..."><button style="margin-top:9px" onclick="addUrl()">Thêm URL</button></div>
-<video id="preview" controls></video>
-<div id="videoInfo" class="status">Chưa có video.</div>
+<h2>① Video</h2>
+<label class="drop" for="file">📁 Chọn video từ máy<br><span class="muted">MP4, MOV, WEBM...</span></label>
+<input id="file" type="file" accept="video/*" hidden onchange="loadVideo(event)">
+<video id="preview" controls></video><div id="info" class="muted">Chưa chọn video.</div>
 </section>
 
 <section class="card">
-<h2>② Dịch & giọng lồng tiếng</h2>
-<div class="row">
-<div><label>Ngôn ngữ gốc</label><select id="srcLang"><option>Auto</option><option>Tiếng Việt</option><option>English</option><option>中文</option><option>日本語</option><option>한국어</option></select></div>
-<div><label>Ngôn ngữ dịch</label><select id="dstLang"><option>Tiếng Việt</option><option>English</option><option>中文</option><option>日本語</option><option>한국어</option><option>Español</option><option>Français</option><option>ไทย</option><option>Bahasa Indonesia</option></select></div>
-</div>
-<label style="display:block;margin-top:12px">Giọng đọc AI</label>
-<select id="voice"><option>Đang tìm giọng hệ thống...</option></select>
-<div class="row" style="margin-top:10px"><button onclick="previewVoice()">🔊 Nghe thử</button><button class="secondary" onclick="stopVoice()">■ Dừng</button></div>
-<div class="toggle"><span>🔇 Tắt âm thanh gốc</span><input id="muteOriginal" type="checkbox" onchange="toggleOriginal()"></div>
-<div class="toggle"><span>🎵 Giữ nhạc/nền gốc khi lồng tiếng</span><input id="keepBg" type="checkbox" checked></div>
-<p class="note">Trong bản production, TTS sẽ dùng API giọng AI (ví dụ Google Cloud TTS). Giao diện này đã có chỗ để kết nối API; không giả vờ rằng trình duyệt đang tạo giọng Google.</p>
+<h2>② Âm thanh lồng tiếng</h2>
+<div class="toggle"><span>🔇 Tắt tiếng gốc</span><input id="mute" type="checkbox" onchange="preview.muted=this.checked"></div>
+<div class="toggle"><span>🎵 Giữ nhạc/nền gốc</span><input id="bg" type="checkbox" checked></div>
+<div class="toggle"><span>🗣️ Lồng tiếng toàn bộ video</span><input id="dub" type="checkbox" checked></div>
+<label style="display:block;margin-top:12px">Giọng Tiếng Việt</label>
+<select id="voice"><option>Đang tải giọng...</option></select>
+<div class="row" style="margin-top:10px"><button onclick="testVoice()">🔊 Nghe thử</button><button class="gray" onclick="speechSynthesis.cancel()">■ Dừng</button></div>
+<p class="note">Khi nối backend, lựa chọn này sẽ gọi Google Cloud Text-to-Speech để tạo giọng tiếng Việt cho toàn bộ câu thoại.</p>
 </section>
 
 <section class="card wide">
-<h2>③ Nhận diện toàn bộ lời thoại</h2>
-<div class="row"><button onclick="transcribeAll()">🎙️ Nhận diện toàn bộ video</button><button class="secondary" onclick="translateAll()">🌐 Dịch toàn bộ</button><button class="green" onclick="addSegment()">＋ Thêm câu</button></div>
-<div class="progress"><div id="bar" class="bar"></div></div>
-<div id="process" class="status">Sẵn sàng.</div>
+<h2>③ Nhận diện → Dịch toàn bộ → Chỉnh sửa</h2>
+<div class="row">
+<button onclick="runSTT()">🎙️ Nhận diện FULL video</button>
+<button onclick="translateFull()">🇻🇳 Dịch FULL sang tiếng Việt</button>
+<button class="green" onclick="add()">＋ Thêm câu</button>
+</div>
+<div class="progress"><div id="p1" class="bar"></div></div><div id="status" class="muted">Sẵn sàng xử lý.</div>
 <div id="editor"></div>
 </section>
 
 <section class="card wide">
-<h2>④ Phụ đề</h2>
-<div class="row">
-<div><label>Phụ đề</label><select id="subtitle"><option>Hiện phụ đề đã dịch</option><option>Không hiện</option></select></div>
-<div><label>Vị trí</label><select><option>Dưới cùng</option><option>Giữa</option><option>Trên cùng</option></select></div>
-</div>
-<div class="chips"><span class="chip on">Tiếng Việt</span><span class="chip">English</span><span class="chip">中文</span><span class="chip">日本語</span></div>
+<h2>④ Phụ đề tiếng Việt</h2>
+<div class="toggle"><span>📝 Chèn phụ đề tiếng Việt vào video</span><input id="sub" type="checkbox" checked></div>
+<p class="note">Phụ đề xuất ra sẽ lấy đúng cột “Bản dịch Tiếng Việt”, không lấy lại lời gốc.</p>
+<button style="margin-top:10px" onclick="srt()">⬇️ Tải phụ đề .SRT tiếng Việt</button>
 </section>
 
 <section class="card wide">
-<h2>⑤ Hoàn thành video</h2>
-<div class="row">
-<button class="green" onclick="renderVideo()">🎬 Render video</button>
-<button onclick="downloadSRT()">⬇️ Tải phụ đề SRT</button>
-<button class="secondary" onclick="saveProject()">💾 Lưu project</button>
-</div>
-<div class="progress"><div id="renderBar" class="bar"></div></div>
-<div id="renderStatus" class="status">Chưa render.</div>
-<p class="note">Để xuất MP4 thật với giọng AI, cần backend FFmpeg + Speech-to-Text + Translation + TTS. Frontend không thể tự render một video dài và gọi Google TTS chỉ bằng HTML.</p>
+<h2>⑤ Render video hoàn chỉnh</h2>
+<div class="row"><button class="green" onclick="render()">🎬 Lồng tiếng + phụ đề + Render MP4</button><button class="gray" onclick="save()">💾 Lưu project</button></div>
+<div class="progress"><div id="p2" class="bar"></div></div><div id="renderStatus" class="muted">Chưa render.</div>
+<p class="note">Để tạo MP4 thật: backend sẽ dùng Speech-to-Text → dịch Việt → Google TTS → FFmpeg. Web trình duyệt chỉ là giao diện điều khiển, không giả lập kết quả.</p>
 </section>
-</div>
-</main>
-
+</div></main>
 <script>
-let segments=[
-{start:"00:00",end:"00:05",src:"Xin chào mọi người, hôm nay chúng ta sẽ bắt đầu.",dst:"Xin chào mọi người, hôm nay chúng ta sẽ bắt đầu."},
-{start:"00:05",end:"00:10",src:"Đây là video thử nghiệm dịch và lồng tiếng.",dst:"Đây là video thử nghiệm dịch và lồng tiếng."}
-];
-let voices=[];
-
-function tab(id,b){document.getElementById('file').style.display=id==='file'?'block':'none';document.getElementById('url').style.display=id==='url'?'block':'none';document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
-function loadVideo(e){let f=e.target.files[0];if(!f)return;preview.src=URL.createObjectURL(f);videoInfo.textContent='Video: '+f.name+' • '+(f.size/1024/1024).toFixed(1)+' MB'}
-function addUrl(){let u=urlInput.value.trim();if(!u)return;preview.src=u;videoInfo.textContent='Đã nhận URL. TikTok/Douyin cần backend/API có quyền để tải và xử lý.'}
-function render(){editor.innerHTML=segments.map((s,i)=>`<div class="segment"><div class="segment-head"><span>Câu ${i+1}</span><span><button class="danger" onclick="del(${i})">Xóa</button></span></div><div class="time"><input value="${s.start}" onchange="segments[${i}].start=this.value"><input value="${s.end}" onchange="segments[${i}].end=this.value"></div><label>Lời gốc</label><textarea onchange="segments[${i}].src=this.value">${s.src}</textarea><label>Bản dịch</label><textarea onchange="segments[${i}].dst=this.value">${s.dst}</textarea></div>`).join('')}
-function del(i){segments.splice(i,1);render()}
-function addSegment(){segments.push({start:"00:10",end:"00:15",src:"",dst:""});render()}
-function transcribeAll(){let b=document.getElementById('bar'),p=document.getElementById('process');b.style.width='0';p.textContent='Đang nhận diện toàn bộ lời thoại...';let n=0;let t=setInterval(()=>{n+=10;b.style.width=n+'%';if(n>=100){clearInterval(t);p.textContent='Demo đã hoàn tất. Backend STT sẽ thay dữ liệu mẫu bằng transcript toàn video.';render()}},120)}
-function translateAll(){let lang=dstLang.value;segments.forEach(s=>s.dst=s.src?'['+lang+'] '+s.src:'');render();process.textContent='Đã dịch toàn bộ các đoạn đang có. Production sẽ gọi Translation API cho toàn transcript.'}
-function toggleOriginal(){preview.muted=muteOriginal.checked}
-function populateVoices(){voices=speechSynthesis.getVoices();voice.innerHTML=voices.map((v,i)=>`<option value="${i}">${v.name} — ${v.lang}</option>`).join('')||'<option>Không có voice</option>'}
-function previewVoice(){let text=segments.map(x=>x.dst).join(' ');let u=new SpeechSynthesisUtterance(text);let v=voices[+voice.value];if(v){u.voice=v;u.lang=v.lang}speechSynthesis.speak(u)}
-function stopVoice(){speechSynthesis.cancel()}
-function download(name,data,type){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type}));a.download=name;a.click()}
-function downloadSRT(){let s=segments.map((x,i)=>`${i+1}\n00:${x.start}:00 --> 00:${x.end}:00\n${x.dst}\n`).join('\n');download('subtitles-vi.srt',s,'text/plain')}
-function saveProject(){download('video-translate-project.json',JSON.stringify({srcLang:srcLang.value,dstLang:dstLang.value,muteOriginal:muteOriginal.checked,keepBg:keepBg.checked,segments},null,2),'application/json')}
-function renderVideo(){let b=renderBar,s=renderStatus;b.style.width='0';s.textContent='Đang chuẩn bị render...';let n=0,t=setInterval(()=>{n+=8;b.style.width=Math.min(n,100)+'%';if(n>=100){clearInterval(t);s.textContent='Prototype hoàn tất quy trình. Bản production sẽ tạo MP4 bằng FFmpeg + TTS backend.'}},150)}
-speechSynthesis.onvoiceschanged=populateVoices;populateVoices();render();
-</script>
-</body></html>
+let segs=[
+{start:"00:00",end:"00:05",src:"Hello everyone, today we are going to start.",vi:"Xin chào mọi người, hôm nay chúng ta sẽ bắt đầu."},
+{start:"00:05",end:"00:10",src:"This is a full video translation and dubbing test.",vi:"Đây là bài kiểm tra dịch và lồng tiếng toàn bộ video."}
+],voices=[];
+const $=id=>document.getElementById(id);
+function loadVideo(e){let f=e.target.files[0];if(!f)return;$('preview').src=URL.createObjectURL(f);$('info').textContent=`${f.name} • ${(f.size/1048576).toFixed(1)} MB`}
+function renderEditor(){$('editor').innerHTML=segs.map((s,i)=>`<div class="seg"><div class="seghead"><span>Câu ${i+1}</span><button class="red" onclick="del(${i})">Xóa</button></div><div class="time"><input value="${s.start}" onchange="segs[${i}].start=this.value"><input value="${s.end}" onchange="segs[${i}].end=this.value"></div><label>Lời thoại gốc</label><textarea onchange="segs[${i}].src=this.value">${s.src}</textarea><label>🇻🇳 Bản dịch Tiếng Việt</label><textarea onchange="segs[${i}].vi=this.value">${s.vi}</textarea></div>`).join('')}
+function del(i){segs.splice(i,1);renderEditor()} function add(){segs.push({start:"00:10",end:"00:15",src:"",vi:""});renderEditor()}
+function animateBar(id,done){let n=0;let t=setInterval(()=>{n+=5;$(id).style.width=n+"%";if(n>=100){clearInterval(t);done()}},80)}
+function runSTT(){ $('status').textContent="Đang nhận diện TOÀN BỘ video...";animateBar("p1",()=>{$('status').textContent="Đã nhận diện toàn bộ transcript (bản demo). Backend STT sẽ thay bằng transcript thật.";renderEditor()})}
+function translateFull(){segs.forEach(s=>{if(s.src)s.vi="🇻🇳 "+s.src});$('status').textContent="Đã chuyển toàn bộ các câu sang vùng bản dịch Tiếng Việt. Backend Translation sẽ dịch nội dung thật.";renderEditor()}
+function populate(){voices=speechSynthesis.getVoices();$('voice').innerHTML=voices.filter(v=>/vi(-|_)?VN/i.test(v.lang)).map((v,i)=>`<option value="${i}">${v.name} — ${v.lang}</option>`).join('')||voices.map((v,i)=>`<option value="${i}">${v.name} — ${v.lang}</option>`).join('')}
+function testVoice(){let u=new SpeechSynthesisUtterance(segs.map(x=>x.vi).join(" "));let v=voices[+$('voice').value];if(v){u.voice=v;u.lang=v.lang}else u.lang="vi-VN";speechSynthesis.speak(u)}
+function srt(){let out=segs.map((x,i)=>`${i+1}\\n00:${x.start}:00 --> 00:${x.end}:00\\n${x.vi}\\n`).join("\\n");let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([out],{type:"text/plain"}));a.download="phu-de-tieng-viet.srt";a.click()}
+function save(){let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify({target:"vi-VN",mute:$('mute').checked,keepBackground:$('bg').checked,dubbing:$('dub').checked,subtitle:$('sub').checked,segments:segs},null,2)],{type:"application/json"}));a.download="project-dich-tieng-viet.json";a.click()}
+function render(){$('renderStatus').textContent="Đang chuẩn bị lồng tiếng toàn bộ + phụ đề Việt + render MP4...";animateBar("p2",()=>{$('renderStatus').textContent="Prototype đã chạy hết quy trình. Bản production cần backend Google TTS + FFmpeg để tạo file MP4 thật."})}
+speechSynthesis.onvoiceschanged=populate;populate();renderEditor();
+</script></body></html>
